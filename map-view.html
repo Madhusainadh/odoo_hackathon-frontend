@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Litter Hotspots Map</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Litter Hotspots Map</h1>
+        <div id="map" style="height: 500px;"></div>
+    </div>
+
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Include Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Your custom JavaScript -->
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([51.505, -0.09], 13);
+
+        // Add a tile layer (you can choose other providers like Mapbox or OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Sample data (replace with your actual hotspot data)
+        const hotspots = [
+            { lat: 51.505, lon: -0.09, description: 'Litter hotspot 1' },
+            { lat: 51.51, lon: -0.1, description: 'Litter hotspot 2' },
+            // Add more hotspots here...
+        ];
+
+        // Create markers for each hotspot
+        hotspots.forEach(hotspot => {
+            const marker = L.marker([hotspot.lat, hotspot.lon]).addTo(map);
+            marker.bindPopup(hotspot.description); // Show hotspot description on click
+            // Customize marker appearance (e.g., icon, color) as needed
+        });
+    </script>
+</body>
+</html>
