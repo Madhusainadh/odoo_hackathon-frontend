@@ -9,6 +9,10 @@
     <!-- Your custom CSS (if any) -->
     <style>
         /* Add your styles here */
+    .invalid {
+        border-color: red;
+    }
+
     </style>
 </head>
 <body>
@@ -35,100 +39,30 @@
             <label for="description">Description:</label>
             <textarea class="form-control" id="description" rows="4" placeholder="Enter a message related to garbage collection" required></textarea>
         </div>
-
-         <!-- Photo upload -->
-         <div class="form-group">
+        <!-- Photo upload -->
+        <div class="form-group">
             <label for="photo">Upload Photo:</label>
             <input type="file" class="form-control-file" id="photos" name="photos[]" multiple accept="image/*;capture=camera" required>
             <small class="text-muted">Please take photos using your device's camera and then upload them here.</small>
         </div>
         <!-- Display uploaded photo -->
         <img id="uploadedPhoto" src="#" alt="Uploaded Photo" style="max-width: 100%; display: none;">
-    
-    <div id="photoPreview"></div>
-        <!-- Other form inputs (description, photos, etc.) go here -->
-        <!-- Example: <textarea id="description" class="form-control" placeholder="Enter description"></textarea> -->
-        <!-- Example: <input type="file" id="photos" class="form-control" accept="image/*"> -->
-        <!-- Add a button to submit the form -->
-        <!-- Example: <button onclick="addHotspot()" class="btn btn-primary">Add Hotspot</button> -->
+        <div id="photoPreview"></div>
+        <!-- Date input -->
+        <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" class="form-control" id="date" required>
+        </div>
+        <div id="errorMessage" style="color: red;"></div>
+        <!-- Submit button -->
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" id="submitButton" disabled>Submit</button>
+        </div>
     </div>
-     <!-- Submit button -->
-     <button type="submit" class="btn btn-primary" id="submitButton" disabled>Submit</button>
-</div>
-
     <!-- Include Bootstrap JS (optional) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Your custom JavaScript -->
-    <script>
-        // Get references to input fields
-        const addressInput = document.getElementById('address');
-        const latitudeInput = document.getElementById('latitude');
-        const longitudeInput = document.getElementById('longitude');
-        const descriptionInput = document.getElementById('description'); 
-        const photoInput = document.getElementById('photo');
-        //const uploadedPhoto = document.getElementById('uploadedPhoto');
-        const photoPreview = document.getElementById('photoPreview');
-        const submitButton = document.getElementById('submitButton');
-
-        // Event listener for address input change
-        addressInput.addEventListener('input', async () => {
-            // ... (existing geocoding logic)
-            
-        
-            validateForm();
-        });
-
-        // Get the user's current position
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const latitude = position.coords.latitude;
-                const longitude = position.coords.longitude;
-                latitudeInput.value = latitude;
-                longitudeInput.value = longitude;
-            },
-            (error) => {
-                console.error('Error getting location:', error.message);
-                latitudeInput.value = 'Location unavailable';
-                longitudeInput.value = 'Location unavailable';
-                validateForm();
-            }
-        );
-
-      
-
-        
-
-         // Event listener for photo upload
-         photosInput.addEventListener('change', (event) => {
-            const files = event.target.files;
-            if (files.length > 0) {
-                displayPhotoPreview(files);
-                validateForm();
-
-            }
-        });
-
-        // Function to display photo preview
-        function displayPhotoPreview(files) {
-            photoPreview.innerHTML = ''; // Clear existing previews
-            for (const file of files) {
-                const img = document.createElement('img');
-                img.src = URL.createObjectURL(file);
-                img.style.maxWidth = '100%';
-                img.style.marginBottom = '10px'; // Add some spacing between images
-                photoPreview.appendChild(img);
-            }
-        }
-
-        // Function to validate form
-    function validateForm() {
-        const isValid = addressInput.value.trim() !== '' &&
-                        descriptionInput.value.trim() !== '' && // Validate description
-                        photosInput.files.length > 0;
-        submitButton.disabled = !isValid;
-    }
-    </script>
+    <script src="static/js/add-hotspots.js"></script>
 </body>
 </html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Garbage Collector Dashboard</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Welcome, [Garbage Collector's Name]!</h1>
+        <h2 class="mt-4">Your Assigned Hotspots</h2>
+        <div id="hotspots" class="mt-4">
+            <!-- Hotspots will be dynamically added here -->
+        </div>
+
+        <template id="hotspotTemplate">
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h5 class="card-title hotspot-title"></h5>
+                    <p class="card-text hotspot-description"></p>
+                    <p class="card-text"><strong>Status:</strong> <span class="hotspot-status"></span></p>
+                    <button class="btn btn-primary update-status-button">Update Status</button>
+                    <select class="form-control mt-2 status-select">
+                        <option value="visited">Visited</option>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="cleaning">Cleaning</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+        </template>
+    </div>
+
+    <!-- Include Bootstrap JS and Socket.IO client -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script src="static/js/dashboard.js"></script>
+</body>
+</html>
+
